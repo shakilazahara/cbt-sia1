@@ -10,6 +10,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
@@ -63,6 +64,12 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             return Storage::disk('public')->url($this->photo_path); // return url foto 
         }
         return $this->avatar_url;
+    }
+
+    // relasi ke tabel students 
+    public function student(): HasOne 
+    {
+        return $this->hasOne(Student::class);
     }
 
      // Tambahkan fungsi ini

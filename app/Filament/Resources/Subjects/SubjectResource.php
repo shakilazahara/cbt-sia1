@@ -39,7 +39,7 @@ class SubjectResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static string|UnitEnum|null $navigationGroup = 'BasisData';
+    protected static string|UnitEnum|null $navigationGroup = 'Basis Data';
 
     protected static ?string $modelLabel = 'pelajaran';
 

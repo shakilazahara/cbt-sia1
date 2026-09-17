@@ -8,6 +8,7 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 class EditExam extends EditRecord
 {
@@ -21,5 +22,11 @@ class EditExam extends EditRecord
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
+    }
+
+    #[Override]
+    public function getRelationManagers(): array
+    {
+        return [];
     }
 }

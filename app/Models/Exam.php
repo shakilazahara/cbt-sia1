@@ -21,9 +21,10 @@ class Exam extends Model
         'is_available' => 'boolean',
     ];
 
-    // relasi many - to -many dengan model subject
+    // relasi many - to - many dengan model subject
     public function subjects():BelongsToMany
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class)
+            ->withPivot('qty');
     }
 }

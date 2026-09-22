@@ -31,11 +31,19 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    // autorisasi user agar dapat login ke Filament Panel
+    // Autorisasi user agar dapat login ke Filament Panel
     #[Override]
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_staff;
+        if ($panel->getId() === 'admin') {
+            return $this->is_staff;
+        }
+
+        if ($panel->getId() === 'test') {
+            return !$this->is_staff;
+        }
+
+        return false;
     }
 
     /**
@@ -50,29 +58,32 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             'password' => 'hashed',
             'is_staff' => 'boolean',
         ];
+
     }
 
-    // user avatar url
-    #[Override]
+    // protected $appends = ['avatar_url'];
+
+     // user avatar url
     public function getFilamentAvatarUrl(): ?string
     {
         // cek apakah user punya foto tersimpan
-        if (
-            $this->photo_path && 
+        if(
+            $this->photo_path &&
             Storage::disk('public')->exists($this->photo_path)
-        ) {
-            return Storage::disk('public')->url($this->photo_path); // return url foto 
-        }
-        return $this->avatar_url;
+         ){
+            // return url foto
+            return Storage::disk('public')->url($this->photo_path); 
+         }
+         return null;
     }
 
-    // relasi ke tabel students 
-    public function student(): HasOne 
+    //relasi ke tabel students
+    public function student(): HasOne
     {
         return $this->hasOne(Student::class);
     }
 
-     // Tambahkan fungsi ini
+      // Tambahkan fungsi ini
     protected static function booted(): void
     {
         static::updating(function (User $user) {

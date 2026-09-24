@@ -27,4 +27,10 @@ class Exam extends Model
         return $this->belongsToMany(Subject::class)
             ->withPivot('qty');
     }
+
+    // relasi ke model
+    public function examResults()
+    {
+        return $this->hasMany(ExamResult::class);
+    }
 }

@@ -28,4 +28,10 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class);
     }
+
+    // relasi ke model
+    public function examResultAnswers()
+    {
+        return $this->hasMany(ExamResultAnswer::class);
+    }
 }

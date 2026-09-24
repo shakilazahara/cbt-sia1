@@ -27,4 +27,10 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // relasi ke model
+    public function examResults()
+    {
+        return $this->hasMany(ExamResult::class);
+    }
 }

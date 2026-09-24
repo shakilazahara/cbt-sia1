@@ -29,4 +29,10 @@ class Subject extends Model
         return $this->belongsToMany(Exam::class)
             ->withPivot('qty');
     }
+
+    // relasi ke model
+    public function examResults()
+    {
+        return $this->hasMany(ExamResult::class);
+    }
 }
